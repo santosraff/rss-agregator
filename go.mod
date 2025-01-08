@@ -1,4 +1,4 @@
-module github.com/santosraff/rss-agregator
+module github.com/santosraff/rssagg
 
 go 1.23.4
 
