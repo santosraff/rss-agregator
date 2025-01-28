@@ -25,25 +25,25 @@ type RSSItem struct {
 }
 
 func urlToFeed(url string) (RSSFeed, error) {
-    httpClient := http.Client{
-        Timeout: 10 * time.Second,
-    }
+	httpClient := http.Client{
+		Timeout: 10 * time.Second,
+	}
 
-    resp, err := httpClient.Get(url)
-    if err != nil {
-        return RSSFeed{}, err
-    }
-    defer resp.Body.Close()
+	resp, err := httpClient.Get(url)
+	if err != nil {
+		return RSSFeed{}, err
+	}
+	defer resp.Body.Close()
 
-    dat, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return RSSFeed{}, err
-    }
-    rssFeed :=  RSSFeed{}
+	dat, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return RSSFeed{}, err
+	}
+	rssFeed := RSSFeed{}
 
-    err = xml.Unmarshal(dat, &rssFeed)
-    if err != nil {
-        return RSSFeed{}, err
-    }
-    return rssFeed, nil
+	err = xml.Unmarshal(dat, &rssFeed)
+	if err != nil {
+		return RSSFeed{}, err
+	}
+	return rssFeed, nil
 }
